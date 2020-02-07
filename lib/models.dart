@@ -1,5 +1,6 @@
 class User {
   int id;
+  List users;
   String user = '';
   String position = '';
 

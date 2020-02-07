@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../models.dart';
 import '../navbar.dart';
 
 class AccountScreen extends StatefulWidget {
-    static const String id = 'account_screen';
-    static const String title = 'Account';
+  static const String id = 'account_screen';
+  static const String title = 'Account';
 
   @override
   _AccountScreenState createState() => _AccountScreenState();
@@ -29,7 +31,7 @@ class _AccountScreenState extends State<AccountScreen> {
     super.dispose();
   }
 
-  void save() {
+  void _save() {
     if (userController.text.isNotEmpty && positionController.text.isNotEmpty) {
       User _user = new User();
       _user.save();
@@ -41,14 +43,26 @@ class _AccountScreenState extends State<AccountScreen> {
     }
   }
 
+  void _getAccount() {
+    // Consumer
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AccountScreen.title),
-      ),
-      body: _buildForm(),
-      bottomNavigationBar: Navbar(),
+    
+    _getAccount();
+
+    return 
+    // ChangeNotifierProvider<UserAcc>( //      <--- ChangeNotifierProvider
+    //   create: (context) => UserAcc(),
+    //   child: 
+      Scaffold(
+        appBar: AppBar(
+          title: Text(AccountScreen.title),
+        ),
+        body: _buildForm(),
+        bottomNavigationBar: Navbar(),
+      // )
     );
   }
 
@@ -84,23 +98,7 @@ class _AccountScreenState extends State<AccountScreen> {
       ),
       RaisedButton(
         onPressed: () {
-          save();
-          // dispose();
-          // return showDialog(
-          //   context: context,
-          //   builder: (context) {
-          //     return AlertDialog(
-          //       // Retrieve the text the that user has entered by using the
-          //       // TextEditingController.
-          //       content: Column(
-          //         children: <Widget>[
-          //           Text(_user.user),
-          //           Text(_user.position),
-          //         ],
-          //       ),
-          //     );
-          //   }
-          // );
+          _save();
         },
         child: Text('Submit')
       ),
@@ -129,3 +127,7 @@ class _AccountScreenState extends State<AccountScreen> {
     );
   }
 }
+
+// class UserAcc with ChangeNotifier {
+
+// }
